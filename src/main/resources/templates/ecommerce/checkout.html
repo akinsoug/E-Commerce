@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+    <html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <!-- <head th:replace="fragments :: head"> -->
+    
+<head th:replace="fragments/fragment :: head">
+</head>
+    <body>
+ <div th:replace="fragments/fragment :: navbar" ></div>
+    
+	<!-- <div th:replace="fragments/navbar"></div> -->
+	<div>
+<main role="main">
+		<div class="container">
+			<div class="row">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Image</th>
+							<th>Item</th>
+							<th>Unit Price</th>
+							<th>Quantity</th>
+							<th>Sub Total</th>
+							<th></th>
+						</tr>
+					</thead>
+
+					<!--  
+                   -->
+                   <tbody>
+                      <tr th:each="item : ${cart}" th:with="product=${item.key}">
+                          <td style="width: 10%; padding-left: 0"><img th:src="${product.picture}" style="width: 100%; max-height: 80px"/></td>
+                          <td th:text="${product.name}"></td>
+                          <td th:text="${product.price}"></td>
+                          <td th:text="${item.value}">
+                             
+                          </td>
+                          <td th:if="${list.add(product.price * item.value)}" th:text="${#numbers.formatCurrency(product.price * item.value)}"></td>
+                          
+                      </tr>
+                  </tbody>
+					<tfoot>
+						<tr>
+							<td></td>
+							<td>Total</td>
+							<td></td>
+							<strong></strong> <td th:text="${#numbers.formatCurrency(#aggregates.sum(list))}"></td> <!-- -->
+							<td></td>
+						</tr>
+					</tfoot>
+				</table>
+				
+				
+              <!-- <form th:action="@{/cart}" method="post" id="updateForm" th:if="${cart.size() == 0}">
+                  form doesn't support PATCH requests, but this tells Spring Boot to use @PatchMapping anyway.              <!-- 
+                  <input type="hidden" name="_method" value="PATCH" />
+                  <button type="submit" class="btn btn-primary">Update Cartttttt</button>
+              </form> -->
+             <!--  
+              <form th:action="@{/charge}" method="post" id="updateForm" th:if="${cart.size() > 0}">
+                  form doesn't support PATCH requests, but this tells Spring Boot to use @PatchMapping anyway.
+                  <input type="hidden" name="_method" value="PATCH" />
+                  <button type="submit" class="btn btn-primary">Pay with Cart</button>
+              </form>
+              -->
+              
+	              &nbsp; 
+              <div th:if="${cart.size() == 0}">Nothing in your cart yet.</div>
+              
+               
+	              <form action='/charge' method='POST' id='checkout-form'>
+					    <input type='hidden' th:value='${amount}' name='amount' />
+					    <label>Price:  &nbsp; &nbsp; <span th:text="${#numbers.formatCurrency(#aggregates.sum(list))}" > </span>  &nbsp; &nbsp;</label>
+					    <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+					    <script
+					       src='https://checkout.stripe.com/checkout.js' 
+					       class='stripe-button'
+					       th:attr='data-key=${stripePublicKey}, 
+					         data-amount=${#aggregates.sum(list)}, 
+					         data-currency=${currency}'
+					       data-name='Baeldung'
+					       data-description='Spring course checkout'
+					       data-image
+					         ='https://www.baeldung.com/wp-content/themes/baeldung/favicon/android-chrome-192x192.png'
+					       data-locale='auto'
+					       data-zip-code='false'>
+					   </script>
+					</form>
+
+			</div>
+		</div>
+	
+
+		
+	</div>
+	<!-- 
+    <footer th:replace="fragments :: footer"></footer> -->
+		<!-- ----------------------------------------------------- -->
+		<footer th:replace="fragments/fragment :: footer"></footer>
+    
+    </body>
+    </html>
+ 

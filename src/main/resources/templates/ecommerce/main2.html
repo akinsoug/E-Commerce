@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+ <html>
+<!--  <html xmlns:th="http://www.thymeleaf.org" lang="en"> -->
+  <head th:replace="fragments/fragment :: head">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+  </head>
+  <body>
+ <div th:replace="fragments/fragment :: navbar" ></div>
+
+	<main role="main" style="background-color: teal;">
+		<!-- Main jumbotron for a primary marketing message or call to action -->
+		<div class="jumbotron">
+			<div class="container">
+				<h1 class="display-3">Tech Talent Store</h1>
+				<p>This is a small e-commerce application that allows the user
+					to purchase some of a few products that are offered here.</p>
+				<p>
+					<a class="btn btn-primary btn-lg" href="/about" role="button">Learn
+						more &raquo;</a>
+				</p>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<!--Fill this part in-->
+			</div>
+		</div>
+		<!-- ------------------------------------------------  -->
+
+		<div class="container">
+			<h2 style="text-align: center;">Product List</h2>
+			<nav class="navbar navbar-default"
+				style="background-color: cornsilk; margin: 2em;">
+				<ul class="nav navbar-nav">
+					<li routerLinkActive="active current"><a
+						routerLink="createemployee"> Create Product</a></li>
+				</ul>
+			</nav>
+			<!--  th:each="prod:${products}"  -->
+			<div  class="row">
+			<!-- <div class="col-sm"> </div> --> <!-- ------------------------------------------------------ -->
+				<div class="card border-dark" th:each="prod:${products}">
+				<div class="card-header bg-info">
+					<h4 class="card-title" th:text="${prod.name}"></h4>
+				</div>
+				<div class="card-body">
+					<div class="col ">
+						<div class="row vertical-align">
+							<div class="clo">
+								
+								
+					<a th:href="@{/product/} + ${prod.id}" ><img th:src="${prod.picture}" class="img-responsive center-block" alt="Not Found"> </a> <!--	 --> <!--  -->
+								
+								<div class="col ">
+									<div class="row">
+										<div class="col ">PRODUCT:</div>
+										<div class="col bg-light" th:text="${prod.name}"> </div>
+									</div>
+									<div class="row">
+										<div class="col ">BRAND:</div>
+										<div class="col  bg-light" th:text="${prod.brand}"></div>
+									</div>
+									<div class="row">
+										<div class="col ">CATEGORY:</div>
+										<div class="col  bg-light" th:text="${prod.category}"></div>
+									</div>
+									<div class="row">
+										<div class="col ">PRICE:</div>
+										<div class="col  bg-light" th:text="${prod.price}"></div>
+									</div>
+									<div class="row">
+										<div class="col ">QUANTITY:</div>
+										<div class="col  bg-light" th:text="${prod.quantity}"></div>
+									</div>
+									<div class="row">
+										<div class="col "></div>
+										<div class="col  bg-light"></div>
+									</div>
+									<div class="row">
+										<div class="col-6"></div>
+										<div class="col-6 bg-light"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- </div> -->
+			</div>
+			
+		</div>
+
+		<!-- ----------------------------------------------------- -->
+		<footer th:replace="fragments/fragment :: footer"></footer>
+		<br> <br> <br> <br> <br>
+
+	</main>
+
+ <br> <br> <br> <br> <br>
+  </body>
+</html>

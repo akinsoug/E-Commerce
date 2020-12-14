@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+ <html>
+<!--  <html xmlns:th="http://www.thymeleaf.org" lang="en"> -->
+  <head th:replace="fragments/fragment :: head">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+  </head>
+  <body>
+ <div th:replace="fragments/fragment :: navbar" ></div>
+ 
+  <main role="main" style="background-color: teal;">
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+          <div class="container">
+              <h1 class="display-3">Tech Talent Store</h1>
+              <p>This is a small e-commerce application that allows the user to purchase some of a few products that are offered here. </p>
+              <p><a class="btn btn-primary btn-lg" href="/about" role="button">Learn more &raquo;</a></p>
+          </div>
+      </div>
+      <div class="container">
+          <div class="row">
+              <!--Fill this part in-->
+          </div>
+      </div>
+      <!-- ------------------------------------------------  -->
+<div> <!--  th:If="!viewCartProductDetails" -->
+  <div th:each="prod:${products}">
+    <div class="card">
+      <div class="row">
+        <div class="col-auto">
+          <!--   <img src="../../../static/images/cart.png" class="img-responsive center-block" alt="Not Found" >onError="this.src='assets/resources/404.png'" -->
+          <img src="../../static/images/resources/404.png" class="img-responsive center-block" alt="Not Found" > 
+          <img src="static/images/resources/404.png" class="img-responsive center-block" alt="Not Found" >
+          <img src="src/main/resources/static/images/resources/404.png" class="img-responsive center-block" alt="Not Found" > 
+          <img src="C:/Users/Esther2/Downloads/MzllZjM2ZjMt-ZTIzMWU5ZjQt-w186._SY116_CB414698095_.JPEG" class="img-responsive center-block" alt="Not Found" > 
+        </div> <!-- -->
+        <div class="col card-block offset-1">
+        <br />
+    	<strong>PRODUCT:</strong> <span th:text="${prod.name}"></span> <br>
+		<strong>BRAND:</strong> <span th:text="${prod.brand}"></span> <br /> 
+		<strong>CATEGORY:</strong> <span th:text="${prod.category}"></span> <br>
+		<strong>PRICE:</strong> <span th:text="${prod.price}"></span> <br /> 
+		 <strong>QUANTITY:</strong> <span th:text="${prod.quantity}"></span> <br>
+		<br /> <br />
+        </div>
+        <div class="col card-block">
+          <br />
+          <button class="btn btn-primary" >Details</button>
+          <br />
+          <br />
+          <button class="btn btn-primary" >Remove</button>
+        </div>
+      </div> 
+      
+    </div>
+  </div>
+  <!-- <div th:If="!cartList || cartList.length==0" class="error-message">
+    No products are added to the cart
+  </div> -->
+</div>
+
+
+		<!-- ----------------------------------------------------- -->
+      
+  </main>
+ 
+ <footer th:replace="fragments/fragment :: footer"></footer>
+  </body>
+</html>
